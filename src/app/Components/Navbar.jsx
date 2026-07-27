@@ -1,16 +1,16 @@
 // components/Navbar.jsx
 "use client";
 
-import { Button } from "@heroui/react";
 import Link from "next/link";
 import { useState } from "react";
 import { FiBookOpen, FiMenu, FiX } from "react-icons/fi";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Courses", href: "/courses" },
-  { name: "Add Course", href: "/add-course" },
-  { name: "Dashboard", href: "/dashboard" },
+  { name: "Rooms", href: "/rooms" },
+  { name: "Add Room", href: "/add-room" },
+  { name: "My Listings", href: "/my-listings" },
+  { name: "My Bookings", href: "/my-bookings" },
 ];
 
 const Navbar = () => {
@@ -41,20 +41,24 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Right Side */}
+
         <div className="hidden md:flex items-center gap-5">
+          <Link href={'/profile'} 
+           className="text-gray-700 hover:text-blue-600 font-medium transition-colors" 
+          >Profile</Link>
           <Link
             href="/login"
             className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
           >
             Login
           </Link>
-          <Button
-            as={Link}
-            href="/register"
-            className="bg-blue-600 text-white font-semibold rounded-full px-6"
+          <Link
+            href="/signup"
+            className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
           >
-            Join Free
-          </Button>
+            SignUp
+          </Link>
+           
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -81,6 +85,7 @@ const Navbar = () => {
             </Link>
           ))}
           <hr className="border-gray-200" />
+          <Link href={'/profile'}>Profile</Link>
           <Link
             href="/login"
             onClick={() => setIsOpen(false)}
@@ -88,14 +93,13 @@ const Navbar = () => {
           >
             Login
           </Link>
-          <Button
-            as={Link}
-            href="/register"
-            onPress={() => setIsOpen(false)}
-            className="bg-blue-600 text-white font-semibold rounded-full px-6 w-full"
+
+           <Link
+            href="/signup"
+            className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
           >
-            Join Free
-          </Button>
+            SignUp
+          </Link>
         </div>
       )}
     </nav>

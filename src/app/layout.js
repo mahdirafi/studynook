@@ -1,15 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces } from "next/font/google";
 import Footer from './Components/Footer.jsx';
 import Navbar from './Components/Navbar.jsx';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
 });
 
@@ -22,9 +17,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col"   cz-shortcut-listen="true">
+      <body className="min-h-full flex flex-col font-[family-name:var(--font-fraunces)]" cz-shortcut-listen="true">
         <Navbar />
 
         {children}
