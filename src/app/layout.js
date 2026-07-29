@@ -1,4 +1,5 @@
 import { Fraunces } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import Footer from './Components/Footer.jsx';
 import Navbar from './Components/Navbar.jsx';
 import "./globals.css";
@@ -22,7 +23,10 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col font-[family-name:var(--font-fraunces)]" cz-shortcut-listen="true">
         <Navbar />
 
-        {children}
+         <main>
+          {children} 
+           <Toaster position="top-center" />
+           </main>
         
         <Footer/>
       </body>

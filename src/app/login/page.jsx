@@ -1,15 +1,15 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import {
-    Button,
-    Card,
-    Description,
-    FieldError,
-    Form,
-    Input,
-    Label,
-    Separator,
-    TextField,
+  Button,
+  Card,
+  Description,
+  FieldError,
+  Form,
+  Input,
+  Label,
+  Separator,
+  TextField,
 } from "@heroui/react";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
