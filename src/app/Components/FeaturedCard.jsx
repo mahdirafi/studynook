@@ -10,7 +10,7 @@ const FeaturedCard = async() => {
   console.log(features);
 
     return (
-         <div className="max-w-7xl mx-auto px-4 py-10">
+         <div className="max-w-7xl mx-auto px-4 py-10 border-gray-300 shadow-xl">
               <div className='flex items-center justify-between'>
                 <div>
                     <h1 className="text-4xl font-semibold text-black mb-3">All Study Rooms</h1>

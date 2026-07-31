@@ -1,24 +1,29 @@
+
+import BookingCard from "@/app/Components/BookingCard";
 import { DeleteAlert } from "@/app/Components/DeleteAlert";
 import { EditModal } from "@/app/Components/EditModals";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import {
   FiArrowLeft,
-  FiCalendar,
-  FiCheckCircle,
-  FiDollarSign,
-  FiLayers,
-  FiUsers,
+  FiCheckCircle
 } from "react-icons/fi";
+ 
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
+
+  const session = await auth.api.getSession({headers: await headers()});
+  const user = session?.user
+  console.log(user);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`, {
     cache: "no-store",
   });
 
-  // ১. fetch fail check (network/HTTP error, যেমন 404/500)
+ 
   if (!res.ok) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#faf6ef]">
@@ -29,10 +34,10 @@ const RoomDetailsPage = async ({ params }) => {
     );
   }
 
-  // ২. আগে room parse করো
+ 
   const room = await res.json();
 
-  // ৩. তারপর null check (backend যদি 200 status-এ null/empty পাঠায়)
+  
   if (!room) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#faf6ef]">
@@ -43,7 +48,7 @@ const RoomDetailsPage = async ({ params }) => {
     );
   }
 
-  // ৪. এখন safe-ভাবে destructure করো
+ 
   const {
     images,
     name,
@@ -130,7 +135,7 @@ const RoomDetailsPage = async ({ params }) => {
                   </span>
                 ))
               ) : (
-                <p className="text-sm text-[#a39d8c]">কোনো amenity যোগ করা হয়নি।</p>
+                <p className="text-sm text-[#a39d8c]"> No Amenents add</p>
               )}
             </div>
           </div>
@@ -139,43 +144,19 @@ const RoomDetailsPage = async ({ params }) => {
         {/* Right column */}
         <div className="flex flex-col gap-5">
           {/* Price & booking card */}
-          <div className="rounded-2xl bg-white border border-[#ece4d8] p-6">
-            <div className="flex items-baseline justify-between">
-              <span className="text-3xl font-semibold text-emerald-800">
-                 $ {hourlyRate?.amount ?? hourlyRate?.value ?? 0}
-              </span>
-              <span className="text-sm text-[#a39d8c]">per hour</span>
-            </div>
+          <div>
+            <BookingCard room={room} formattedDate={formattedDate}/>
+          </div>
 
-            <div className="flex flex-col gap-3 mt-5 text-sm text-[#4a473f]">
-              <div className="flex items-center gap-2.5">
-                <FiLayers size={15} className="text-[#a39d8c]" />
-                <span>{floor || "N/A"}</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <FiUsers size={15} className="text-[#a39d8c]" />
-                <span>{seatCapacity?.label || "N/A"}</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <FiDollarSign size={15} className="text-[#a39d8c]" />
-                <span>{totalBookings ?? 0} total bookings</span>
-              </div>
-            </div>
-
-            <button className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 transition-colors text-white text-sm font-semibold py-3 cursor-pointer">
-              <FiCalendar size={16} />
-              Book Now
-            </button>
-
-            <div className="flex items-center justify-between mx-6 my-4">
+            <div className="flex items-center justify-between mx-3">
               <div>
                 <EditModal room={room} />
               </div>
               <div>
-                <DeleteAlert room={room} />
+                <DeleteAlert room={room}/>
               </div>
-            </div>
           </div>
+
 
           {/* Listed by card */}
           <div className="rounded-2xl bg-white border border-[#ece4d8] p-6 shadow-xl">
@@ -184,7 +165,7 @@ const RoomDetailsPage = async ({ params }) => {
             </p>
             <div className="flex items-center gap-3">
               <Image
-                src={listedBy?.avatar || "/default-avatar.png"}
+                src={listedBy?.avatar || user?.image}
                 alt={listedBy?.name || "User"}
                 width={80}
                 height={80}
@@ -192,10 +173,10 @@ const RoomDetailsPage = async ({ params }) => {
               />
               <div>
                 <p className="text-sm font-semibold text-[#2b2b28]">
-                  {listedBy?.name || "Unknown"}
+                  {listedBy?.name || user?.name}
                 </p>
                 <p className="text-sm text-[#a39d8c]">
-                  {listedBy?.email || ""}
+                  {listedBy?.email || user?.email}
                 </p>
               </div>
             </div>

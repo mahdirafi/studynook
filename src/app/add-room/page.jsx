@@ -14,6 +14,11 @@ const AMENITIES_OPTIONS = [
 ];
 
 const AddRoomPage = () => {
+  const {data : session, isPending} = authClient.useSession();
+    const user= session?.user
+    console.log(user);
+
+    
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
 

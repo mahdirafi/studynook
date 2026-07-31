@@ -1,10 +1,7 @@
-
-const BookingsPage = () => {
-    return (
-        <div>
-            <h1>This is the Booking Page</h1>
-        </div>
-    );
+export function MyBookingPage() {
+  return (
+    <div> 
+      this is my Booking page
+    </div>
+  )
 };
-
-export default BookingsPage;

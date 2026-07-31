@@ -40,7 +40,7 @@ export default function RoomsCard({ room }) {
             {name}
           </h3>
           <span className="shrink-0 rounded-full bg-blue-100 text-[#155dfc] text-sm font-medium px-2.5 py-1">
-            {hourlyRate?.label || "N/A"}
+            $ {hourlyRate?.amount ?? hourlyRate?.value ?? 0}
           </span>
         </div>
 

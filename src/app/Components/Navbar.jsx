@@ -1,5 +1,4 @@
 "use client";
-
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
 import Image from "next/image";
@@ -20,9 +19,7 @@ const Navbar = () => {
   const user= session?.user
   console.log(user);
 
-  // const { data: session, isPending } = authClient.useSession();
-  // const user = session?.user;
-  // console.log("This is user" ,user)
+  
 
   const [isOpen, setIsOpen] = useState(false);
 
