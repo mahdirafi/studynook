@@ -58,18 +58,19 @@ const AddRoomPage = () => {
     setSubmitting(true);
 
     const payload = {
-      name: formData.name.trim(),
-      description: formData.description.trim(),
-      images: formData.imageUrl.trim() ? [formData.imageUrl.trim()] : [],
-      floor: formData.floor.trim(),
-      seatCapacity: {
-        label: formData.seatCapacity.trim(),
-      },
-      hourlyRate: {
-        value: Number(formData.hourlyRate),
-      },
-      amenities: selectedAmenities,
-    };
+  name: formData.name.trim(),
+  description: formData.description.trim(),
+  images: formData.imageUrl.trim() ? [formData.imageUrl.trim()] : [],
+  floor: formData.floor.trim(),
+  seatCapacity: {
+    label: formData.seatCapacity.trim(),
+  },
+  hourlyRate: {
+    value: Number(formData.hourlyRate),
+  },
+  amenities: selectedAmenities,
+  ownerEmail: user?.email,   
+};
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {

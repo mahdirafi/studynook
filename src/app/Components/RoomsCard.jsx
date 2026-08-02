@@ -19,6 +19,9 @@ export default function RoomsCard({ room }) {
   const visibleAmenities = safeAmenities.slice(0, 3);
   const extraCount = safeAmenities.length - visibleAmenities.length;
 
+
+  
+
   return (
     <div className="w-full max-w-[300px] h-full flex flex-col rounded-3xl bg-[#fdfaf5] border border-[#ece4d8] overflow-hidden shadow-sm">
       {/* Image */}
