@@ -4,10 +4,16 @@ import { BookingModal } from "./BookingModal";
 
 const BookingCard = ({ room, formattedDate }) => {
   const {
+    images,
+    name,
+    description,
     floor,
     seatCapacity,
     hourlyRate,
     totalBookings,
+    listedBy,
+    listedAt,
+    amenities,
   } = room;
 
   return (

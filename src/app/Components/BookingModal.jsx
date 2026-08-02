@@ -1,12 +1,17 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Calendar } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { useState } from "react";
 import { FaCalendarCheck } from "react-icons/fa";
 
 export function BookingModal({ room, formattedDate }) {
-  const { floor, seatCapacity, hourlyRate, totalBookings } = room;
+  const {data : session, isPending} = authClient.useSession();
+    const user= session?.user
+    console.log(user);
+  const {images,  name,  description, floor,  seatCapacity,  hourlyRate, totalBookings,
+    listedBy,  listedAt, amenities, } = room;
 
   const [date, setDate] = useState("");
   const [start, setStart] = useState("09:00");
@@ -25,8 +30,41 @@ export function BookingModal({ room, formattedDate }) {
 
   const totalCost = (getDuration() * rate).toFixed(2);
 
-  const handleConfirm = () => {
-    console.log({ roomId: room?._id, date, start, end, note, totalCost });
+  const handleConfirm = async() => {
+    // console.log({ roomId: room?._id, date, start, end, note, totalCost });
+    const bookingData ={
+      userId: user?.id,
+      userImage: user?.image,
+      userName: user?.name,
+      roomId: room?._id,
+      date,
+      start,
+      end,
+      note,
+      totalCost,
+      images,
+    name,
+    description,
+    floor,
+    seatCapacity,
+    hourlyRate,
+    totalBookings,
+    listedBy,
+    listedAt,
+    amenities,
+    }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
+    method: "POST",
+    headers: {
+      "content-type" : "application/json",
+    },
+    body: JSON.stringify(bookingData),
+  });
+  const data = await res.json();
+  console.log(data);
+   
+
   };
 
   return (
