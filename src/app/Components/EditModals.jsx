@@ -103,22 +103,24 @@ export function EditModal({ room }) {
   return (
     <Modal isOpen={open} onOpenChange={setOpen}>
       <Button
-        variant="outline"
-        className="border-blue-400"
+        variant="bordered"
+        className="border-blue-500 dark:border-blue-400 !text-blue-600 dark:!text-blue-400 hover:!bg-blue-50 dark:hover:!bg-blue-500/10 rounded-full font-medium"
         onPress={() => setOpen(true)}
       >
         <BiEdit /> Edit
       </Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
-          <Modal.Dialog className="sm:max-w-xl">
+          <Modal.Dialog className="sm:max-w-xl !bg-white dark:!bg-gray-900">
             <Modal.CloseTrigger />
             <Modal.Header>
-              <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+              <Modal.Icon className="bg-blue-600 dark:bg-blue-500 !text-white">
                 <Envelope className="size-5" />
               </Modal.Icon>
-              <Modal.Heading>Edit Room</Modal.Heading>
-              <p className="mt-1.5 text-sm leading-5 text-muted">
+              <Modal.Heading className="!text-gray-900 dark:!text-gray-100 font-bold tracking-tight">
+                Edit Room
+              </Modal.Heading>
+              <p className="mt-1.5 text-sm leading-5 text-gray-500 dark:text-gray-400 tracking-wide">
                 Update your room details below.
               </p>
             </Modal.Header>
@@ -126,112 +128,111 @@ export function EditModal({ room }) {
               <Surface variant="default">
                 <form
                   onSubmit={handleSubmit}
-                  className="flex flex-col gap-6 rounded-2xl bg-white border border-[#ece4d8] p-7 md:p-8"
+                  className="flex flex-col gap-6 rounded-2xl !bg-white dark:!bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-[0_4px_20px_-6px_rgba(0,0,0,0.12)] dark:shadow-black/20 p-7 md:p-8"
                 >
                   {/* Room Name */}
-                  {/* Room Name */}
-<div className="flex flex-col gap-2">
-  <label htmlFor="name" className="text-sm font-semibold text-[#2b2b28]">
-    Room Name
-  </label>
-  <input
-    id="name"
-    name="name"
-    type="text"
-    required
-    value={formData.name}
-    onChange={handleChange}
-    className="rounded-xl border border-[#e4dcc9] bg-[#faf6ef] px-4 py-2.5 text-sm text-[#2b2b28] outline-none focus:border-emerald-500 transition-colors"
-  />
-</div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="name" className="text-sm font-semibold !text-gray-900 dark:!text-gray-100">
+                      Room Name
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="rounded-xl border border-gray-200 dark:border-gray-700 !bg-gray-50 dark:!bg-gray-800 px-4 py-2.5 text-sm !text-gray-900 dark:!text-gray-100 outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 transition-colors"
+                    />
+                  </div>
 
-{/* Description */}
-<div className="flex flex-col gap-2">
-  <label htmlFor="description" className="text-sm font-semibold text-[#2b2b28]">
-    Description
-  </label>
-  <textarea
-    id="description"
-    name="description"
-    rows={4}
-    required
-    value={formData.description}
-    onChange={handleChange}
-    className="rounded-xl border border-[#e4dcc9] bg-[#faf6ef] px-4 py-2.5 text-sm text-[#2b2b28] outline-none focus:border-emerald-500 transition-colors resize-none"
-  />
-</div>
+                  {/* Description */}
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="description" className="text-sm font-semibold !text-gray-900 dark:!text-gray-100">
+                      Description
+                    </label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      rows={4}
+                      required
+                      value={formData.description}
+                      onChange={handleChange}
+                      className="rounded-xl border border-gray-200 dark:border-gray-700 !bg-gray-50 dark:!bg-gray-800 px-4 py-2.5 text-sm !text-gray-900 dark:!text-gray-100 outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 transition-colors resize-none"
+                    />
+                  </div>
 
-{/* Image URL */}
-<div className="flex flex-col gap-2">
-  <label htmlFor="imageUrl" className="text-sm font-semibold text-[#2b2b28]">
-    Image URL
-  </label>
-  <input
-    id="imageUrl"
-    name="imageUrl"
-    type="text"
-    required
-    value={formData.imageUrl}
-    onChange={handleChange}
-    placeholder="https://..."
-    className="rounded-xl border border-[#e4dcc9] bg-[#faf6ef] px-4 py-2.5 text-sm text-[#2b2b28] placeholder:text-[#b3ac98] outline-none focus:border-emerald-500 transition-colors"
-  />
-</div>
+                  {/* Image URL */}
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="imageUrl" className="text-sm font-semibold !text-gray-900 dark:!text-gray-100">
+                      Image URL
+                    </label>
+                    <input
+                      id="imageUrl"
+                      name="imageUrl"
+                      type="text"
+                      required
+                      value={formData.imageUrl}
+                      onChange={handleChange}
+                      placeholder="https://..."
+                      className="rounded-xl border border-gray-200 dark:border-gray-700 !bg-gray-50 dark:!bg-gray-800 px-4 py-2.5 text-sm !text-gray-900 dark:!text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 transition-colors"
+                    />
+                  </div>
 
-{/* Floor / Capacity / Hourly Rate */}
-<div className="grid grid-cols-3 gap-4">
-  <div className="flex flex-col gap-2">
-    <label htmlFor="floor" className="text-sm font-semibold text-[#2b2b28]">
-      Floor
-    </label>
-    <input
-      id="floor"
-      name="floor"
-      type="text"
-      required
-      value={formData.floor}
-      onChange={handleChange}
-      placeholder="e.g. 3rd Floor"
-      className="rounded-xl border border-[#e4dcc9] bg-[#faf6ef] px-4 py-2.5 text-sm text-[#2b2b28] placeholder:text-[#b3ac98] outline-none focus:border-emerald-500 transition-colors"
-    />
-  </div>
+                  {/* Floor / Capacity / Hourly Rate */}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="floor" className="text-sm font-semibold !text-gray-900 dark:!text-gray-100">
+                        Floor
+                      </label>
+                      <input
+                        id="floor"
+                        name="floor"
+                        type="text"
+                        required
+                        value={formData.floor}
+                        onChange={handleChange}
+                        placeholder="e.g. 3rd Floor"
+                        className="rounded-xl border border-gray-200 dark:border-gray-700 !bg-gray-50 dark:!bg-gray-800 px-4 py-2.5 text-sm !text-gray-900 dark:!text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 transition-colors"
+                      />
+                    </div>
 
-  <div className="flex flex-col gap-2">
-    <label htmlFor="seatCapacity" className="text-sm font-semibold text-[#2b2b28]">
-      Capacity
-    </label>
-    <input
-      id="seatCapacity"
-      name="seatCapacity"
-      type="text"
-      required
-      value={formData.seatCapacity}
-      onChange={handleChange}
-      className="rounded-xl border border-[#e4dcc9] bg-[#faf6ef] px-4 py-2.5 text-sm text-[#2b2b28] outline-none focus:border-emerald-500 transition-colors"
-    />
-  </div>
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="seatCapacity" className="text-sm font-semibold !text-gray-900 dark:!text-gray-100">
+                        Capacity
+                      </label>
+                      <input
+                        id="seatCapacity"
+                        name="seatCapacity"
+                        type="text"
+                        required
+                        value={formData.seatCapacity}
+                        onChange={handleChange}
+                        className="rounded-xl border border-gray-200 dark:border-gray-700 !bg-gray-50 dark:!bg-gray-800 px-4 py-2.5 text-sm !text-gray-900 dark:!text-gray-100 outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 transition-colors"
+                      />
+                    </div>
 
-  <div className="flex flex-col gap-2">
-    <label htmlFor="hourlyRate" className="text-sm font-semibold text-[#2b2b28]">
-      Hourly Rate ($)
-    </label>
-    <input
-      id="hourlyRate"
-      name="hourlyRate"
-      type="number"
-      min="0"
-      step="0.01"
-      required
-      value={formData.hourlyRate}
-      onChange={handleChange}
-      className="rounded-xl border border-[#e4dcc9] bg-[#faf6ef] px-4 py-2.5 text-sm text-[#2b2b28] outline-none focus:border-emerald-500 transition-colors"
-    />
-  </div>
-</div>
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="hourlyRate" className="text-sm font-semibold !text-gray-900 dark:!text-gray-100">
+                        Hourly Rate ($)
+                      </label>
+                      <input
+                        id="hourlyRate"
+                        name="hourlyRate"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        required
+                        value={formData.hourlyRate}
+                        onChange={handleChange}
+                        className="rounded-xl border border-gray-200 dark:border-gray-700 !bg-gray-50 dark:!bg-gray-800 px-4 py-2.5 text-sm !text-gray-900 dark:!text-gray-100 outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 transition-colors"
+                      />
+                    </div>
+                  </div>
 
                   {/* Amenities */}
                   <div className="flex flex-col gap-3">
-                    <p className="text-sm font-semibold text-[#2b2b28]">
+                    <p className="text-sm font-semibold !text-gray-900 dark:!text-gray-100">
                       Amenities
                     </p>
                     <div className="grid grid-cols-2 gap-3">
@@ -244,19 +245,19 @@ export function EditModal({ room }) {
                             onClick={() => toggleAmenity(amenity)}
                             className={`flex items-center gap-2.5 rounded-xl border px-4 py-2.5 text-sm transition-colors ${
                               isSelected
-                                ? "border-emerald-600 bg-emerald-50 text-emerald-800"
-                                : "border-[#e4dcc9] bg-[#f3ede0] text-[#4a473f] hover:border-[#d8cfb8]"
+                                ? "border-blue-500 dark:border-blue-400 !bg-blue-50 dark:!bg-blue-500/10 !text-blue-700 dark:!text-blue-400"
+                                : "border-gray-200 dark:border-gray-700 !bg-gray-50 dark:!bg-gray-800 !text-gray-600 dark:!text-gray-300 hover:border-gray-300 dark:hover:border-gray-600"
                             }`}
                           >
                             <span
                               className={`flex items-center justify-center w-4 h-4 rounded-full border-2 shrink-0 ${
                                 isSelected
-                                  ? "border-emerald-600 bg-emerald-600"
-                                  : "border-[#c3bba4]"
+                                  ? "border-blue-600 dark:border-blue-400 bg-blue-600 dark:bg-blue-400"
+                                  : "border-gray-300 dark:border-gray-600"
                               }`}
                             >
                               {isSelected && (
-                                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-gray-900" />
                               )}
                             </span>
                             {amenity}
@@ -270,10 +271,15 @@ export function EditModal({ room }) {
                       type="button"
                       variant="secondary"
                       onPress={() => setOpen(false)}
+                      className="!bg-gray-100 dark:!bg-gray-800 !text-gray-700 dark:!text-gray-300 hover:!bg-gray-200 dark:hover:!bg-gray-700 rounded-full font-medium"
                     >
                       Cancel
                     </Button>
-                    <Button type="submit" disabled={submitting}>
+                    <Button
+                      type="submit"
+                      disabled={submitting}
+                      className="!bg-blue-600 dark:!bg-blue-500 hover:!bg-blue-700 dark:hover:!bg-blue-600 !text-white rounded-full font-medium"
+                    >
                       {submitting ? "Saving..." : "Save"}
                     </Button>
                   </Modal.Footer>
