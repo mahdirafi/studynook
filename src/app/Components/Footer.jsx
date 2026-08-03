@@ -181,7 +181,7 @@ const Footer = () => {
                 <span className="bg-white/5 border border-white/10 p-2 rounded-lg shrink-0">
                   <FiPhone size={14} />
                 </span>
-                <li></li>
+                 
                 <a
                   href="tel:+8801000000000"
                   className="hover:text-blue-400 transition-colors"

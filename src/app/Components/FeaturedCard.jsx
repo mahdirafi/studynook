@@ -3,47 +3,48 @@ import Link from 'next/link';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import Feature from './Feature';
 
-const FeaturedCard = async() => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`);
+const FeaturedCard = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`);
   const features = await res.json();
-//   return data || [] ;
-  console.log(features);
 
-    return (
-         <div className="max-w-7xl mx-auto px-4 py-10 border-gray-300 shadow-xl">
-              <div className='flex items-center justify-between'>
-                <div>
-                    <h1 className="text-4xl font-semibold text-black mb-3">All Study Rooms</h1>
-              <p className="text-muted mb-6">
-                Browse the full catalog. Filter by amenity, price, or search by name.</p>
-                </div>
-
-                <div>
-                    <Link href={'/rooms'}>
-                        <Button variant='outline' className='border-2 border-gray-300'>  View All Rooms 
-                            <FaLongArrowAltRight />
-                        </Button>
-                    </Link>
-                </div>
-
-              </div>
-
-        
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {features.map((room,index) => (
-            <Feature key={index} room={room} />
-          ))}
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div>
+          <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+            Handpicked For You
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-2">
+            Featured Study{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Rooms
+            </span>
+          </h1>
+          <p className="text-gray-500 text-base leading-relaxed max-w-md">
+            Browse the full catalog. Filter by amenity, price, or search by
+            name.
+          </p>
         </div>
-        
-            </div>
-          );
-        };
-   
+
+        <Link href="/rooms">
+          <Button
+            variant="bordered"
+            className="border-2 border-gray-200 hover:border-blue-500 hover:text-blue-600 rounded-full px-6 font-medium transition-colors flex items-center gap-2"
+          >
+            View All Rooms
+            <FaLongArrowAltRight size={14} />
+          </Button>
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {features.map((room, index) => (
+          <Feature key={index} room={room} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default FeaturedCard;
-
-
-
-
-
-
