@@ -1,3 +1,5 @@
+
+import { FiGrid } from "react-icons/fi";
 import FilterSidebar from "../Components/FilterSidebar";
 import RoomsCard from "../Components/RoomsCard";
 
@@ -18,12 +20,19 @@ const RoomsPage = async ({ searchParams }) => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 bg-white dark:bg-gray-900/70 transition-colors">
-      <h1 className="text-4xl font-semibold text-black dark:text-gray-100 mb-3">
-        All Study Rooms
-      </h1>
-      <p className="text-muted dark:text-gray-400 mb-6">
-        Browse the full catalog. Filter by amenity, price, or search by name.
-      </p>
+      <div className="flex items-center gap-3 mb-8">
+  <div className="bg-blue-600 dark:bg-blue-500 p-3 rounded-xl shadow-lg shadow-blue-600/25 dark:shadow-blue-500/20">
+    <FiGrid className="text-white" size={24} />
+  </div>
+  <div>
+    <h1 className="text-3xl font-bold !text-gray-900 dark:!text-gray-100 tracking-tight">
+      All Study Rooms
+    </h1>
+    <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+      Browse the full catalog. Filter by amenity, price, or search by name.
+    </p>
+  </div>
+</div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
         <FilterSidebar currentParams={params} />
