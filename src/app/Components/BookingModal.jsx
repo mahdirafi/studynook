@@ -52,12 +52,19 @@ export function BookingModal({ room, formattedDate }) {
     listedBy,
     listedAt,
     amenities,
-    }
+    };
+
+    //  {#d8c,3}
+    const { data:tokenData } =  authClient.token();
+    const token = tokenData?.token;
+    console.log(token);
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
     method: "POST",
     headers: {
       "content-type" : "application/json",
+      //  {#d8c,3}
+      authorization: `Bearer ${token}`
     },
     body: JSON.stringify(bookingData),
   });

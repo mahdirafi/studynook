@@ -1,3 +1,4 @@
+
 import BookingCard from "@/app/Components/BookingCard";
 import { DeleteAlert } from "@/app/Components/DeleteAlert";
 import { EditModal } from "@/app/Components/EditModals";
@@ -13,12 +14,22 @@ import {
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
+  //  {#c4a,4}
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+  console.log(token);
 
   const session = await auth.api.getSession({headers: await headers()});
   const user = session?.user
   console.log(user);
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`,{
+    //  {#c4a,4}
+    headers:{
+      authorization:`Bearer ${token}`
+    }
+  }, {
     cache: "no-store",
   });
 
