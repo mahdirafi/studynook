@@ -64,18 +64,20 @@ const MyBookingPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 border-gray-100 shadow-2xl">
-      <h1 className="text-4xl font-semibold text-black mb-3">My Bookings</h1>
-      <p className="text-muted mb-6">
+    <div className="max-w-7xl mx-auto px-4 py-10 bg-white dark:bg-gray-950 border-gray-100 dark:border-gray-800 shadow-2xl dark:shadow-black/40 transition-colors">
+      <h1 className="text-4xl font-semibold text-black dark:text-gray-100 mb-3">
+        My Bookings
+      </h1>
+      <p className="text-muted dark:text-gray-400 mb-6">
         Manage your upcoming and past room reservations.
       </p>
 
       <div>
-        <Table>
+        <Table className="dark:text-gray-200">
           <Table.ScrollContainer>
             <Table.Content aria-label="My Bookings Table">
               {/* 6 columns total */}
-              <Table.Header className="bg-blue-100">
+              <Table.Header className="bg-blue-100 dark:bg-gray-800">
                 <Table.Column isRowHeader>ROOM</Table.Column>
                 <Table.Column>DATE</Table.Column>
                 <Table.Column>TIME</Table.Column>
@@ -86,7 +88,7 @@ const MyBookingPage = () => {
               <Table.Body
                 items={bookings}
                 renderEmptyState={() => (
-                  <p className="text-center py-6 text-muted">
+                  <p className="text-center py-6 text-muted dark:text-gray-400">
                     You have no bookings yet.
                   </p>
                 )}
@@ -101,9 +103,9 @@ const MyBookingPage = () => {
                         <img
                           src={booking.images?.[0]}
                           alt={booking.name || "Room image"}
-                          className="w-10 h-10 rounded-md object-cover shrink-0 bg-gray-100"
+                          className="w-10 h-10 rounded-md object-cover shrink-0 bg-gray-100 dark:bg-gray-800"
                         />
-                        <span className="font-medium">
+                        <span className="font-medium dark:text-gray-100">
                           {booking.name || "Unknown room"}
                         </span>
                       </div>
@@ -137,7 +139,7 @@ const MyBookingPage = () => {
                           Cancel
                         </Button>
                       ) : (
-                        <span className="text-muted">—</span>
+                        <span className="text-muted dark:text-gray-500">—</span>
                       )}
                     </Table.Cell>
                   </Table.Row>

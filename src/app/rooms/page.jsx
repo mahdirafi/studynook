@@ -1,4 +1,3 @@
-
 import FilterSidebar from "../Components/FilterSidebar";
 import RoomsCard from "../Components/RoomsCard";
 
@@ -18,9 +17,11 @@ const RoomsPage = async ({ searchParams }) => {
   const rooms = await res.json();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-4xl font-semibold text-black mb-3">All Study Rooms</h1>
-      <p className="text-muted mb-6">
+    <div className="max-w-7xl mx-auto px-4 py-10 bg-white dark:bg-gray-900/70 transition-colors">
+      <h1 className="text-4xl font-semibold text-black dark:text-gray-100 mb-3">
+        All Study Rooms
+      </h1>
+      <p className="text-muted dark:text-gray-400 mb-6">
         Browse the full catalog. Filter by amenity, price, or search by name.
       </p>
 
@@ -28,8 +29,12 @@ const RoomsPage = async ({ searchParams }) => {
         <FilterSidebar currentParams={params} />
 
         <div>
-          <p className="text-sm text-[#a39d8c] mb-4">
-            Showing <span className="font-medium text-[#2b2b28]">{rooms.length}</span> rooms
+          <p className="text-sm text-[#a39d8c] dark:text-gray-500 mb-4">
+            Showing{" "}
+            <span className="font-medium text-[#2b2b28] dark:text-gray-200">
+              {rooms.length}
+            </span>{" "}
+            rooms
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">

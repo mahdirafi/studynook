@@ -1,4 +1,3 @@
-
 import BookingCard from "@/app/Components/BookingCard";
 import { DeleteAlert } from "@/app/Components/DeleteAlert";
 import { EditModal } from "@/app/Components/EditModals";
@@ -26,8 +25,8 @@ const RoomDetailsPage = async ({ params }) => {
  
   if (!res.ok) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#faf6ef]">
-        <p className="text-[#4a473f] text-lg font-medium">
+      <div className="min-h-screen flex items-center justify-center bg-[#faf6ef] dark:bg-[#15140f]">
+        <p className="text-[#4a473f] dark:text-[#c8c2ae] text-lg font-medium">
           Could not find any room
         </p>
       </div>
@@ -40,8 +39,8 @@ const RoomDetailsPage = async ({ params }) => {
   
   if (!room) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#faf6ef]">
-        <p className="text-[#4a473f] text-lg font-medium">
+      <div className="min-h-screen flex items-center justify-center bg-[#faf6ef] dark:bg-[#15140f]">
+        <p className="text-[#4a473f] dark:text-[#c8c2ae] text-lg font-medium">
           Could not find any room
         </p>
       </div>
@@ -71,11 +70,11 @@ const RoomDetailsPage = async ({ params }) => {
     : "N/A";
 
   return (
-    <div className="min-h-screen bg-[#faf6ef] px-6 py-8 md:px-12 md:py-10">
+    <div className="min-h-screen bg-[#faf6ef] dark:bg-[#15140f] px-6 py-8 md:px-12 md:py-10 transition-colors">
       {/* Back link */}
       <Link
         href="/rooms"
-        className="inline-flex items-center gap-2 text-[#2b2b28] text-sm font-medium mb-6 hover:opacity-70 transition-opacity"
+        className="inline-flex items-center gap-2 text-[#2b2b28] dark:text-[#f2eee2] text-sm font-medium mb-6 hover:opacity-70 transition-opacity"
       >
         <FiArrowLeft size={16} />
         Back
@@ -97,29 +96,29 @@ const RoomDetailsPage = async ({ params }) => {
           {/* Title row */}
           <div className="flex items-start justify-between gap-3 mt-6">
             <h1
-              className="text-3xl md:text-4xl font-semibold text-[#2b2b28]"
+              className="text-3xl md:text-4xl font-semibold text-[#2b2b28] dark:text-[#f2eee2]"
               style={{ fontFamily: "var(--font-fraunces, serif)" }}
             >
               {name}
             </h1>
-            <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-3 py-1.5">
+            <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-medium px-3 py-1.5">
               <FiCheckCircle size={13} />
               {totalBookings ?? 0} bookings
             </span>
           </div>
 
-          <p className="text-sm text-[#a39d8c] mt-1">
+          <p className="text-sm text-[#a39d8c] dark:text-[#8a8570] mt-1">
             Listed {formattedDate}
           </p>
 
-          <p className="text-[#4a473f] leading-relaxed mt-5">
+          <p className="text-[#4a473f] dark:text-[#c8c2ae] leading-relaxed mt-5">
             {description}
           </p>
 
           {/* Amenities */}
           <div className="mt-8">
             <h2
-              className="text-lg font-semibold text-[#2b2b28] mb-3"
+              className="text-lg font-semibold text-[#2b2b28] dark:text-[#f2eee2] mb-3"
               style={{ fontFamily: "var(--font-fraunces, serif)" }}
             >
               Amenities
@@ -129,13 +128,13 @@ const RoomDetailsPage = async ({ params }) => {
                 amenities.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full bg-[#f6ddb9] text-[#8a5a2b] text-sm font-medium px-3.5 py-1.5"
+                    className="rounded-full bg-[#f6ddb9] dark:bg-[#4a3a20] text-[#8a5a2b] dark:text-[#e8bc82] text-sm font-medium px-3.5 py-1.5"
                   >
                     {item}
                   </span>
                 ))
               ) : (
-                <p className="text-sm text-[#a39d8c]"> No Amenents add</p>
+                <p className="text-sm text-[#a39d8c] dark:text-[#8a8570]"> No Amenents add</p>
               )}
             </div>
           </div>
@@ -159,8 +158,8 @@ const RoomDetailsPage = async ({ params }) => {
 
 
           {/* Listed by card */}
-          <div className="rounded-2xl bg-white border border-[#ece4d8] p-6 shadow-xl">
-            <p className="text-xs tracking-wide text-[#a39d8c] font-medium mb-4">
+          <div className="rounded-2xl bg-white dark:bg-[#1e1c16] border border-[#ece4d8] dark:border-[#38352a] p-6 shadow-xl dark:shadow-black/40">
+            <p className="text-xs tracking-wide text-[#a39d8c] dark:text-[#8a8570] font-medium mb-4">
               LISTED BY
             </p>
             <div className="flex items-center gap-3">
@@ -172,10 +171,10 @@ const RoomDetailsPage = async ({ params }) => {
                 className="w-10 h-10 rounded-full"
               />
               <div>
-                <p className="text-sm font-semibold text-[#2b2b28]">
+                <p className="text-sm font-semibold text-[#2b2b28] dark:text-[#f2eee2]">
                   {listedBy?.name || user?.name}
                 </p>
-                <p className="text-sm text-[#a39d8c]">
+                <p className="text-sm text-[#a39d8c] dark:text-[#8a8570]">
                   {listedBy?.email || user?.email}
                 </p>
               </div>

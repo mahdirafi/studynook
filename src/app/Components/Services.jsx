@@ -57,12 +57,16 @@ const services = [
 ];
 
 const colorMap = {
-  blue: "bg-blue-100 text-blue-600 group-hover:bg-blue-600",
-  indigo: "bg-indigo-100 text-indigo-600 group-hover:bg-indigo-600",
-  sky: "bg-sky-100 text-sky-600 group-hover:bg-sky-600",
-  violet: "bg-violet-100 text-violet-600 group-hover:bg-violet-600",
-  emerald: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600",
-  amber: "bg-amber-100 text-amber-600 group-hover:bg-amber-600",
+  blue: "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 dark:group-hover:bg-blue-500",
+  indigo:
+    "bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500",
+  sky: "bg-sky-100 dark:bg-sky-900/40 text-sky-600 dark:text-sky-400 group-hover:bg-sky-600 dark:group-hover:bg-sky-500",
+  violet:
+    "bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400 group-hover:bg-violet-600 dark:group-hover:bg-violet-500",
+  emerald:
+    "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-600 dark:group-hover:bg-emerald-500",
+  amber:
+    "bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 group-hover:bg-amber-600 dark:group-hover:bg-amber-500",
 };
 
 const ServiceCard = ({ service, index }) => {
@@ -89,7 +93,7 @@ const ServiceCard = ({ service, index }) => {
     <div
       ref={cardRef}
       style={{ transitionDelay: isVisible ? `${index * 80}ms` : "0ms" }}
-      className={`group relative bg-white border border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 hover:-translate-y-1.5 transition-all duration-500 ease-out ${
+      className={`group relative bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 dark:hover:shadow-black/30 hover:-translate-y-1.5 transition-all duration-500 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
@@ -101,37 +105,37 @@ const ServiceCard = ({ service, index }) => {
           className="group-hover:text-white transition-colors duration-300"
         />
       </div>
-      <h3 className="text-lg font-bold text-gray-900 mb-2.5">
+      <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2.5">
         {service.title}
       </h3>
-      <p className="text-gray-500 text-sm leading-relaxed">
+      <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
         {service.description}
       </p>
 
       {/* corner accent */}
-      <div className="absolute top-6 right-6 w-1.5 h-1.5 rounded-full bg-gray-200 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300" />
+      <div className="absolute top-6 right-6 w-1.5 h-1.5 rounded-full bg-gray-200 dark:bg-gray-600 group-hover:bg-blue-500 dark:group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300" />
     </div>
   );
 };
 
 const Services = () => {
   return (
-    <section className="relative w-full bg-gray-50/60 py-20 md:py-28 overflow-hidden">
-      <div className="absolute top-0 right-1/4 w-[350px] h-[350px] bg-blue-100/50 blur-[110px] rounded-full pointer-events-none" />
+    <section className="relative w-full bg-gray-50/60 dark:bg-gray-950 py-20 md:py-28 overflow-hidden">
+      <div className="absolute top-0 right-1/4 w-[350px] h-[350px] bg-blue-100/50 dark:bg-blue-500/10 blur-[110px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full mb-4">
+          <span className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full mb-4">
             What We Offer
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 tracking-tight mb-4">
             Everything You Need to{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
               Study Better
             </span>
           </h2>
-          <p className="text-gray-500 text-base leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed">
             We take care of the space, so you can focus on what matters —
             learning, working, and getting things done.
           </p>

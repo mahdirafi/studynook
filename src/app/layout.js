@@ -2,6 +2,7 @@ import { Fraunces } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Footer from './Components/Footer.jsx';
 import Navbar from './Components/Navbar.jsx';
+import { ThemeProvider } from "./Components/ThemeProvider.jsx";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -17,18 +18,23 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
-      className={`${fraunces.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-fraunces)]" cz-shortcut-listen="true">
-        <Navbar />
+     lang="en" suppressHydrationWarning className={`${fraunces.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col font-[family-name:var(--font-fraunces)] bg-white dark:bg-gray-900 text-black dark:text-white" cz-shortcut-listen="true">
 
-         <main>
-          {children} 
-           <Toaster position="top-center" />
-           </main>
-        
-        <Footer/>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+                
+              <Navbar />
+              <main>
+                {children} 
+                <Toaster position="top-center" />
+              </main>
+              
+              <Footer/>
+        </ThemeProvider>
       </body>
     </html>
   );
