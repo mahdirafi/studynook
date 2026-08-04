@@ -70,6 +70,7 @@ const MyListingPage = () => {
         {/* Room list */}
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* <Link  href={`/rooms/${_id}`}>  */}
             {[...Array(3)].map((_, i) => (
               <div
                 key={i}
@@ -82,6 +83,7 @@ const MyListingPage = () => {
                 </div>
               </div>
             ))}
+        {/* </Link> */}
           </div>
         ) : rooms.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 gap-4 !bg-white dark:!bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800">

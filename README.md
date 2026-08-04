@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# StudyNook
+
+**StudyNook** is a study room booking web application that lets users discover, list, and reserve study rooms. Built with Next.js (App Router) on the frontend, connected to the [studynook-server](https://github.com/mahdirafi/studynook-server) Express.js/MongoDB backend.
+
+## Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+- **UI Library:** [React 19](https://react.dev/)
+- **Component Library:** [HeroUI v3](https://www.heroui.com/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Authentication:** [Better Auth](https://www.better-auth.com/) with [MongoDB adapter](https://www.better-auth.com/docs/adapters/mongo)
+- **Database:** MongoDB
+- **Theming:** next-themes (light/dark mode support)
+- **Icons:** react-icons, @gravity-ui/icons
+- **Notifications:** react-hot-toast
+- **Linting:** ESLint 9
+
+## Features
+
+- 🔐 Authentication with Better Auth (email/password and/or OAuth via Google)
+- 🌗 Light/dark theme support
+- 🏠 Browse and search available study rooms
+- 📄 Room details page with amenities, pricing, and availability
+- ➕ Add, edit, and delete room listings
+- 📅 Book study rooms with date/time selection
+- 🎨 Custom themed UI built with HeroUI v3 (blue color scheme)
+- 🔔 Toast notifications for user feedback
+- 📱 Responsive design across devices
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) 18.18+ (recommended: latest LTS)
+- A running instance of the [studynook-server](https://github.com/mahdirafi/studynook-server) backend
+- A [MongoDB](https://www.mongodb.com/atlas) database (for Better Auth)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/mahdirafi/studynook.git
+cd studynook
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env.local` file in the project root:
+
+```env
+# App
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Backend API
+NEXT_PUBLIC_API_URL=http://localhost:5000
+
+# Better Auth
+BETTER_AUTH_SECRET=your_better_auth_secret
+BETTER_AUTH_URL=http://localhost:3000
+MONGODB_URI=your_mongodb_connection_string
+
+# OAuth (if applicable)
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+> Update the keys above to match exactly what's referenced in `src/lib/auth.js` (or your auth config file) and other env reads across the project.
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://studynook-ten-gamma.vercel.app/] in your browser to see the app.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 5. Build for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+studynook/
+├── public/              # Static assets
+├── src/
+│   ├── app/              # Next.js App Router pages & layouts
+│   ├── components/       # Reusable UI components
+│   └── lib/               # Utilities, auth config, API helpers
+├── eslint.config.mjs
+├── next.config.mjs
+├── postcss.config.mjs
+├── jsconfig.json
+└── package.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> Update this tree once the folder layout under `src/` is finalized (e.g. `src/app/(auth)`, `src/app/rooms`, `src/components/ui`, etc.).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Available Scripts
 
-## Deploy on Vercel
+| Command         | Description                          |
+| --------------- | ------------------------------------ |
+| `npm run dev`   | Start the development server         |
+| `npm run build` | Create an optimized production build |
+| `npm run start` | Start the production server          |
+| `npm run lint`  | Run ESLint checks                    |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Related Repositories
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Backend API:** [studynook-server](https://github.com/mahdirafi/studynook-server)
+
+## Deployment
+
+The recommended way to deploy this app is via [Vercel](https://vercel.com/new), the platform built by the creators of Next.js.
+
+1. Push your code to GitHub.
+2. Import the repository into Vercel.
+3. Add all required environment variables in the Vercel project settings.
+4. Ensure `BETTER_AUTH_URL` and OAuth redirect URIs match your production domain.
+5. Deploy 🚀
+
+## Author
+
+**Mahdi Rafi**
+GitHub: [@mahdirafi](https://github.com/mahdirafi)
+
+## License
+
+This project is licensed under the MIT License.
