@@ -30,7 +30,49 @@ export default function RootLayout({ children }) {
               <Navbar />
               <main>
                 {children} 
-                <Toaster position="top-center" />
+                 
+
+             
+
+<Toaster
+  position="top-center"
+  gutter={12}
+  toastOptions={{
+    duration: 4000,
+    
+    className:
+      "!bg-white dark:!bg-gray-900 !text-gray-900 dark:!text-gray-100 !shadow-[0_8px_30px_-6px_rgba(0,0,0,0.15)] dark:!shadow-black/30 !rounded-xl !px-4 !py-3 !text-sm !font-medium",
+     
+    style: {},
+    success: {
+      iconTheme: {
+        primary: "#2563eb",
+        secondary: "#ffffff",
+      },
+      className:
+        "!border-l-4 !border-l-blue-600 dark:!border-l-blue-500 !border-y !border-r !border-y-gray-200 !border-r-gray-200 dark:!border-y-gray-800 dark:!border-r-gray-800",
+    },
+    error: {
+      iconTheme: {
+        primary: "#dc2626",
+        secondary: "#ffffff",
+      },
+      className:
+        "!border-l-4 !border-l-red-600 dark:!border-l-red-500 !border-y !border-r !border-y-gray-200 !border-r-gray-200 dark:!border-y-gray-800 dark:!border-r-gray-800",
+    },
+    loading: {
+      iconTheme: {
+        primary: "#6b7280",
+        secondary: "#ffffff",
+      },
+      className:
+        "!border-l-4 !border-l-gray-400 dark:!border-l-gray-600 !border-y !border-r !border-y-gray-200 !border-r-gray-200 dark:!border-y-gray-800 dark:!border-r-gray-800",
+    },
+  }}
+/>
+
+
+
               </main>
               
               <Footer/>

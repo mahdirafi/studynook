@@ -18,21 +18,18 @@ const MyBookingPage = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       if (!session?.user?.id) return;
-
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${session.user.id}`
         );
         const data = await res.json();
         setBookings(data);
-        console.log("fetch bookings data:", data);
       } catch (error) {
         console.error("Failed to fetch bookings:", error);
       } finally {
         setLoading(false);
       }
     };
-
     if (session?.user?.id) {
       fetchBookings();
     }
@@ -87,42 +84,24 @@ const MyBookingPage = () => {
           </div>
         </div>
 
-        {/* Card container */}
-        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm dark:shadow-black/20 overflow-hidden">
-          <Table className="dark:text-gray-200" removeWrapper>
+        {/* Desktop/Table View */}
+        <div className="hidden md:block bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+          <Table className="dark:text-gray-200">
             <Table.ScrollContainer>
               <Table.Content aria-label="My Bookings Table">
-                {/* 6 columns total */}
                 <Table.Header className="bg-blue-50 dark:bg-gray-800/60">
-                  <Table.Column
-                    isRowHeader
-                    className="text-blue-700 dark:text-blue-300 font-semibold text-xs uppercase tracking-wide"
-                  >
-                    Room
-                  </Table.Column>
-                  <Table.Column className="text-blue-700 dark:text-blue-300 font-semibold text-xs uppercase tracking-wide">
-                    Date
-                  </Table.Column>
-                  <Table.Column className="text-blue-700 dark:text-blue-300 font-semibold text-xs uppercase tracking-wide">
-                    Time
-                  </Table.Column>
-                  <Table.Column className="text-blue-700 dark:text-blue-300 font-semibold text-xs uppercase tracking-wide">
-                    Cost
-                  </Table.Column>
-                  <Table.Column className="text-blue-700 dark:text-blue-300 font-semibold text-xs uppercase tracking-wide">
-                    Status
-                  </Table.Column>
-                  <Table.Column className="text-blue-700 dark:text-blue-300 font-semibold text-xs uppercase tracking-wide">
-                    Action
-                  </Table.Column>
+                  <Table.Column>Room</Table.Column>
+                  <Table.Column>Date</Table.Column>
+                  <Table.Column>Time</Table.Column>
+                  <Table.Column>Cost</Table.Column>
+                  <Table.Column>Status</Table.Column>
+                  <Table.Column>Action</Table.Column>
                 </Table.Header>
                 <Table.Body
                   items={bookings}
                   renderEmptyState={() => (
                     <div className="flex flex-col items-center justify-center py-16 gap-3">
-                      <div className="bg-blue-50 dark:bg-gray-800 p-4 rounded-full">
-                        <FiInbox className="text-blue-500 dark:text-blue-400" size={28} />
-                      </div>
+                      <FiInbox className="text-blue-500 dark:text-blue-400" size={28} />
                       <p className="text-gray-500 dark:text-gray-400 font-medium">
                         You have no bookings yet.
                       </p>
@@ -130,61 +109,35 @@ const MyBookingPage = () => {
                   )}
                 >
                   {(booking) => (
-                    // 6 cells total — must match the 6 columns above
-                    <Table.Row
-                      id={booking._id}
-                      className="hover:bg-blue-50/60 dark:hover:bg-gray-800/40 transition-colors"
-                    >
+                    <Table.Row key={booking._id}>
                       <Table.Cell>
-                        <div className="flex items-center gap-3 py-1">
-                          {/* Room snapshot fields saved on the booking itself
-                              (from BookingModal) — NOT the user's photo/name */}
+                        <div className="flex items-center gap-3">
                           <img
                             src={booking.images?.[0]}
                             alt={booking.name || "Room image"}
-                            className="w-11 h-11 rounded-lg object-cover shrink-0 bg-gray-100 dark:bg-gray-800 ring-1 ring-gray-100 dark:ring-gray-800"
+                            className="w-11 h-11 rounded-lg object-cover"
                           />
-                          <span className="font-medium text-gray-900 dark:text-gray-100">
-                            {booking.name || "Unknown room"}
-                          </span>
+                          {booking.name}
                         </div>
                       </Table.Cell>
-                      <Table.Cell className="text-gray-600 dark:text-gray-300">
-                        {booking.date}
-                      </Table.Cell>
-                      <Table.Cell className="text-gray-600 dark:text-gray-300">
-                        {booking.start} - {booking.end}
-                      </Table.Cell>
-                      <Table.Cell className="font-semibold text-gray-900 dark:text-gray-100">
-                        ${booking.totalCost}
-                      </Table.Cell>
+                      <Table.Cell>{booking.date}</Table.Cell>
+                      <Table.Cell>{booking.start} - {booking.end}</Table.Cell>
+                      <Table.Cell>${booking.totalCost}</Table.Cell>
                       <Table.Cell>
                         <Chip
                           size="sm"
                           variant="flat"
-                          color={
-                            statusColorMap[booking.status?.trim().toLowerCase()] ||
-                            "default"
-                          }
-                          className="capitalize font-medium"
+                          color={statusColorMap[booking.status?.trim().toLowerCase()] || "default"}
                         >
-                          {booking.status || "unknown"}
+                          {booking.status}
                         </Chip>
                       </Table.Cell>
                       <Table.Cell>
                         {booking.status?.trim().toLowerCase() === "confirmed" ? (
-                          <Button
-                            size="sm"
-                            variant="light"
-                            color="danger"
-                            className="font-medium"
-                            onPress={() => handleCancel(booking._id)}
-                          >
+                          <Button size="sm" color="danger" onPress={() => handleCancel(booking._id)}>
                             Cancel
                           </Button>
-                        ) : (
-                          <span className="text-gray-300 dark:text-gray-600">—</span>
-                        )}
+                        ) : "—"}
                       </Table.Cell>
                     </Table.Row>
                   )}
@@ -192,6 +145,57 @@ const MyBookingPage = () => {
               </Table.Content>
             </Table.ScrollContainer>
           </Table>
+        </div>
+
+        {/* Mobile/Card View */}
+        <div className="md:hidden space-y-4">
+          {bookings.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 gap-3">
+              <FiInbox className="text-blue-500 dark:text-blue-400" size={28} />
+              <p className="text-gray-500 dark:text-gray-400 font-medium">
+                You have no bookings yet.
+              </p>
+            </div>
+          ) : (
+            bookings.map((booking) => (
+              <div key={booking._id} className="bg-white dark:bg-gray-900 rounded-xl border p-4 shadow-sm">
+                {/* Row 1: Room + Date */}
+                <div className="flex justify-between items-center mb-2">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={booking.images?.[0]}
+                      alt={booking.name || "Room image"}
+                      className="w-12 h-12 rounded-lg object-cover"
+                    />
+                    <span className="font-semibold">{booking.name}</span>
+                  </div>
+                  <span className="text-sm text-gray-600">{booking.date}</span>
+                </div>
+                {/* Row 2: Time + Cost */}
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-gray-600">
+                    {booking.start} - {booking.end}
+                  </span>
+                  <span className="font-semibold">${booking.totalCost}</span>
+                </div>
+                {/* Row 3: Status + Action */}
+                <div className="flex justify-between items-center">
+                  <Chip
+                    size="sm"
+                    variant="flat"
+                    color={statusColorMap[booking.status?.trim().toLowerCase()] || "default"}
+                  >
+                    {booking.status}
+                  </Chip>
+                  {booking.status?.trim().toLowerCase() === "confirmed" ? (
+                    <Button size="sm" color="danger" onPress={() => handleCancel(booking._id)}>
+                      Cancel
+                    </Button>
+                  ) : "—"}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
